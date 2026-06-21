@@ -76,4 +76,4 @@ A simulation of bullet trajectories with increasing levels of accuracy and compl
   t_{flight} = \frac{V\sin(\theta) + \sqrt{V^2\sin^2(\theta) + 2gy_0}}{g}
   $$
   
-  from these expressions, I wrote a code that represented the trajectory in the ((0,0),(OX),(OY)) plane in "Ideal.py" and represented it on a graph with Numpy.
+  from these expressions, I wrote a code that represented the trajectory in Catesian coordinates in "Ideal.py" and represented it on a graph with Numpy.
