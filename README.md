@@ -55,4 +55,22 @@ y = -\frac{g}{2}t^2 + Vsin(\theta)t + y_0
 \end{cases}
 $$
 
-from this expression, I wrote a code that represented these two equation in "Ideal.py" and represented the trajectory on a graph with Numpy.
+assuming that ground level is at y = 0, we can calculate the flight time by plugging y = 0 in our equation :
+
+$$
+0 = -\frac{g}{2}t_{flight}^2 + Vsin(\theta)t_{flight} + y_0
+$$
+
+which gives us : 
+
+$$
+t_{flight} = \frac{V\sin(\theta) \pm \sqrt{V^2\sin^2(\theta) + 2gy_0}}{g}
+$$
+
+taking the positive root, we have : 
+
+$$
+t_{flight} = \frac{V\sin(\theta) + \sqrt{V^2\sin^2(\theta) + 2gy_0}}{g}
+$$
+
+from these expressions, I wrote a code that represented the trajectory y(x) in "Ideal.py" and represented it on a graph with Numpy.
