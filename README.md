@@ -91,5 +91,52 @@ the updated equation gives us :
 $$
 \sum \vec{F_{ext}} = \vec{P} - k\vec{V} = m\vec{a}
 $$ 
-  
+
+from this we can again derive two differential equations : 
+
+$$
+\begin{cases}
+ma_x = -kV_x \\
+ma_y = -mg - kV_y
+\end{cases}
+$$
+
+these differential equations are still analytcally solvable. we will use these solutions as benchmarks for validating the accuracy of our numerical methods later.
+
+we can rewrite these two equations as : 
+
+$$
+\begin{cases}
+m\frac{dV_x}{dt} = -kV_x \\
+m\frac{dV_y}{dt} = -mg - kV_y
+\end{cases}
+$$
+
+i.e 
+
+$$
+\begin{cases}
+\frac{dV_x}{dt} = -\frac{k}{m}V_x \\
+\frac{dV_y}{dt} = -g - \frac{k}{m}V_y
+\end{cases}
+$$
+
+which gives us : 
+
+$$
+\begin{cases}
+\frac{dV_x}{dt} = -\frac{k}{m}V_x \\
+\frac{dV_y}{dt} = -g - \frac{k}{m}V_y
+\end{cases}
+$$
+
+from this we can conclude that : 
+
+$$
+\begin{cases}
+V_x = \Delta e^-\frac{k}{m}t , \Delta \in \mathbb{R} \\ 
+\frac{dV_y}{dt} = -g - \frac{k}{m}V_y
+\end{cases}
+$$
+
   
