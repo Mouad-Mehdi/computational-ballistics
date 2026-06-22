@@ -130,13 +130,65 @@ $$
 \end{cases}
 $$
 
-from this we can conclude that : 
+the first equation is a homogenus ODE, solving it yields : 
+
+$$
+V_x(t) = \Delta e^{-\frac{k}{m}t}
+$$
+
+the second one is a non homogenus ODE, we must first solve the homogenus equation  $\frac{dV_y}{dt} + \frac{k}{m}V_y = 0$, which is the same one as the first equation, therefore : 
+
+$$
+V_{yh}(t) = C e^{-\frac{k}{m}t}
+$$
+
+and by noticing that $V_{yp} : t \mapsto - \frac{m}{k}g$ is a particular solution of the equation, we can conclude that $V_y$ is such as : 
+
+$$
+V_{y}(t) = C e^{-\frac{k}{m}t} -\frac{m}{k}g
+$$
+
+which gives us theses two equations : 
 
 $$
 \begin{cases}
-V_x = \Delta e^-\frac{k}{m}t , \Delta \in \mathbb{R} \\ 
-\frac{dV_y}{dt} = -g - \frac{k}{m}V_y
+V_x(t) = \Delta e^{-\frac{k}{m}t} \\
+V_{y}(t) = C e^{-\frac{k}{m}t} -\frac{m}{k}g
 \end{cases}
 $$
 
-  
+knwowing that : 
+
+$$
+\begin{cases}
+V_{x0} = Vcos(\theta) \\
+V_{y0} = Vsin(\theta)
+\end{cases}
+$$
+
+we can conclude with the two speed equations : 
+
+$$
+\begin{cases}
+V_x(t) = Vcos(\theta) e^{-\frac{k}{m}t} \\
+V_{y}(t) = (Vsin(\theta) + \frac{m}{k}g) e^{-\frac{k}{m}t} -\frac{m}{k}g
+\end{cases}
+$$
+
+integrating in respect to time yields us the position equations bellow : 
+
+$$
+\begin{cases}
+x(t) = -\frac{m}{k} Vcos(\theta) e^{-\frac{k}{m}t} + C \\
+y(t) = -\frac{m}{k} (Vsin(\theta) + \frac{m}{k}g) e^{-\frac{k}{m}t} -\frac{m}{k}gt + C
+\end{cases}
+$$
+
+and finally : 
+
+$$
+\begin{cases}
+x(t) = -\frac{m}{k} Vcos(\theta)(1 - e^{-\frac{k}{m}t}) + x_0  \\
+y(t) = \frac{m}{k} (Vsin(\theta) + \frac{m}{k}g) (1- e^{-\frac{k}{m}t}) -\frac{m}{k}gt + y_0
+\end{cases}
+$$
