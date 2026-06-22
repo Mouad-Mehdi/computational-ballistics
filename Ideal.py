@@ -1,32 +1,28 @@
 import matplotlib.pyplot as plt 
 import numpy as np
+from utilities import plot_trajectory
 
-#this code assumes a lanch point of (0,Y0), with speed V and angle theta.
+# Physical parameters : 
+g = 9.8 # Gravitational acceleration
 
-g = 9.8 # gravity constant
-V = 400 # launch speed
-theta = np.radians(45) # launch angle
-Y0 = 1000 # initial height
-t_flight = (V*np.sin(theta) + np.sqrt((V*np.sin(theta))**2 + 2*g*Y0)) / g # calculated flight time
-
-T = np.linspace(0,t_flight,1000)
+# Initial conditions : 
+v = 400 # Launch speed in m/s
+theta = np.radians(45) # Launch angle 
+x0 = 0 # Initial
+y0 = 0 # Initial height
 
 def y(t) : # vertical component
-    return (-g/2)*t**2 + V*np.sin(theta)*t + Y0
+    return (-g/2)*t**2 + v*np.sin(theta)*t + y0
 
 def x(t) : # horizontal component
-    return V*np.cos(theta)*t
+    return v*np.cos(theta)*t + x0
 
-X = x(T) 
-Y = y(T)
+# Calculating the landing time at ground level (y=0)
+t_flight = (v*np.sin(theta) + np.sqrt((v*np.sin(theta))**2 + 2*g*y0))/g 
 
+flight_points = np.linspace(0,t_flight,1000)
 
-plt.grid(True)
-plt.xlabel("Distance (m)")
-plt.ylabel("Height (m)")
-plt.axis('equal')
-plt.scatter(0, Y0, color="red", label="Launch point") # plotting the launch point
-plt.plot(X,Y,color="blue") # plotting the trajectory
-plt.title("Idealized trajectory")
-plt.legend()
-plt.show()
+X = x(flight_points) 
+Y = y(flight_points)
+
+plot_trajectory(X, Y, x0, y0, "Ideal trajectory")
