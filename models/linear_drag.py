@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt 
 import numpy as np
 from scipy.optimize import brentq
-from utilities import plot_trajectory
+from utils.utilities import plot_trajectory
 
 # Physical parameters : 
 g = 9.8 # Gravitational acceleration
