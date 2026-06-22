@@ -192,3 +192,5 @@ x(t) = -\frac{m}{k} Vcos(\theta)(1 - e^{-\frac{k}{m}t}) + x_0  \\
 y(t) = \frac{m}{k} (Vsin(\theta) + \frac{m}{k}g) (1- e^{-\frac{k}{m}t}) -\frac{m}{k}gt + y_0
 \end{cases}
 $$
+
+These two equations will serve as a benchmark for testing the accuracy of Euler's method, since analytical solutions will no longer be possible once quadratic drag is introduced. Consequently, we will have to rely on numerical approximations of the solution.
