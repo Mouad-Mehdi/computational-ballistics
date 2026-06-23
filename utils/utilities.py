@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Function that plots the bullet trajectory given the initial conditions :
 def plot_trajectory(X, Y, x0 ,y0, title):
@@ -8,6 +9,19 @@ def plot_trajectory(X, Y, x0 ,y0, title):
     plt.axis('equal')
     plt.scatter(x0, y0, color="red", label="Launch point")
     plt.plot(X,Y,color="blue")
+    plt.title(title)
+    plt.legend()
+    plt.show()
+
+# Function that plots the bullet trajectory given the initial conditions, and compares it with the Euler's approximation of the trajectory
+def plot_trajectory_comp(X, Y, X_euler, Y_euler, x0 ,y0, title):
+    plt.grid(True)
+    plt.xlabel("Distance (m)")
+    plt.ylabel("Height (m)")
+    plt.axis('equal')
+    plt.scatter(x0, y0, color="red", label="Launch point")
+    plt.plot(X,Y,color="blue",label="Trajectory")
+    plt.plot(X_euler,Y_euler,color="green",label="Euler's approximation")
     plt.title(title)
     plt.legend()
     plt.show()
@@ -41,3 +55,4 @@ def position_from_velocity_ode(f, a, b, h, initial_v, initial_pos):
     Velocity = euler(f, a, b, h, initial_v)
     positions = euler_integral(Velocity, h, initial_pos)
     return positions
+
