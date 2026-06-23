@@ -15,6 +15,9 @@ theta = np.radians(45) # Launch angle
 x0 = 0 # Initial
 y0 = 0 # Initial height
 
+# Euler's approximation parameters :
+h = 0.1
+
 def y(t) : # Vertical positional equation
     return y0 + (m/k)*(v*np.sin(theta) + m*g/k)*(1 - np.exp(-k*t/m)) -m*g*t/k
 
@@ -30,13 +33,13 @@ t_flight = brentq(y,1,t_max_guess)
 def f_x(v):
     return (-k/m)*v
 
-X_euler = position_from_velocity_ode(f_x,0,t_flight,0.1,v*np.cos(theta),x0)
+X_euler = position_from_velocity_ode(f_x,0,t_flight,h,v*np.cos(theta),x0)
 
 # Calculating an approximation of y(flight_points) using Euler's method, given that dv_y/dt = (-k/m)*v_y -g
 def f_y(v):
     return (-k/m)*v -g
 
-Y_euler = position_from_velocity_ode(f_y,0,t_flight,0.1,v*np.sin(theta),y0)
+Y_euler = position_from_velocity_ode(f_y,0,t_flight,h,v*np.sin(theta),y0)
 
 
 flight_points = np.linspace(0,t_flight,1000)
@@ -45,6 +48,5 @@ X = x(flight_points)
 Y = y(flight_points)
 
 plot_trajectory_comp(X, Y, X_euler, Y_euler, x0, y0, "linear drag trajectory")
-
 
 
