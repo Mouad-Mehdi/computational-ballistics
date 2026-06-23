@@ -14,22 +14,30 @@ def plot_trajectory(X, Y, x0 ,y0, title):
 
 # Implementing Euler's aproximation to get a set of points representing V([a,b]) 
 # given a certain ODE dV/dt = f(V), a step size 'h' , and an initial condition V(0) = z0  :
-def euler(f, a, b, h, z0):
+def euler(f, a, b, h, initial):
     t = a
-    z = z0
+    value = initial
     points = []
     while t < b :
-        points.append(z)
-        z = z + h*f(z)
+        points.append(value)
+        value = value + h*f(value)
         t = t + h
     return np.array(points)
 
 # Implementing Euler's approximation to compute the integral of a function
 # given the derivative values, a step size h (the same one used to obtain
 # the sample), and an initial value z0.
-def euler_integral(derivatives, h, z0):
-    z = z0
+def euler_integral(derivatives, h, initial):
+    value = initial
     points = []
-    for i in derivatives:
-        points.append(z)
-        z = z +h*i
+    for derivative in derivatives:
+        points.append(value)
+        value = value +h*derivative
+    return np.array(points)
+
+# a function used to get sample points for x(t)/y(t) given an ODE dV/dt = f(V),
+# two initial conditions v0 and z0, and a step size h.
+def position_from_velocity_ode(f, a, b, h, initial_v, initial_pos):
+    Velocity = euler(f, a, b, h, initial_v)
+    positions = euler_integral(Velocity, h, initial_pos)
+    return positions
