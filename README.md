@@ -101,7 +101,7 @@ ma_y = -mg - kV_y
 \end{cases}
 $$
 
-these differential equations are still analytcally solvable. we will use these solutions as benchmarks for validating the accuracy of our numerical methods later.
+these differential equations are still analytically solvable. we will use these solutions as benchmarks for validating the accuracy of our numerical methods later.
 
 we can rewrite these two equations as : 
 
@@ -120,23 +120,13 @@ $$
 \frac{dV_y}{dt} = -g - \frac{k}{m}V_y
 \end{cases}
 $$
-
-which gives us : 
-
-$$
-\begin{cases}
-\frac{dV_x}{dt} = -\frac{k}{m}V_x \\
-\frac{dV_y}{dt} = -g - \frac{k}{m}V_y
-\end{cases}
-$$
-
-the first equation is a homogenus ODE, solving it yields : 
+the first equation is a homogeneous ODE, solving it yields : 
 
 $$
 V_x(t) = \Delta e^{-\frac{k}{m}t}
 $$
 
-the second one is a non homogenus ODE, we must first solve the homogenus equation  $\frac{dV_y}{dt} + \frac{k}{m}V_y = 0$, which is the same one as the first equation, therefore : 
+the second one is a non homogeneous ODE, we must first solve the homogeneous equation  $\frac{dV_y}{dt} + \frac{k}{m}V_y = 0$, which is the same one as the first equation, therefore : 
 
 $$
 V_{yh}(t) = C e^{-\frac{k}{m}t}
@@ -148,7 +138,7 @@ $$
 V_{y}(t) = C e^{-\frac{k}{m}t} -\frac{m}{k}g
 $$
 
-which gives us theses two equations : 
+which gives us these two equations : 
 
 $$
 \begin{cases}
@@ -157,7 +147,7 @@ V_{y}(t) = C e^{-\frac{k}{m}t} -\frac{m}{k}g
 \end{cases}
 $$
 
-knwowing that : 
+knowing that : 
 
 $$
 \begin{cases}
@@ -175,7 +165,7 @@ V_{y}(t) = (Vsin(\theta) + \frac{m}{k}g) e^{-\frac{k}{m}t} -\frac{m}{k}g
 \end{cases}
 $$
 
-integrating in respect to time yields us the position equations bellow : 
+integrating in respect to time yields the position equations bellow : 
 
 $$
 \begin{cases}
@@ -188,9 +178,10 @@ and finally :
 
 $$
 \begin{cases}
-x(t) = -\frac{m}{k} Vcos(\theta)(1 - e^{-\frac{k}{m}t}) + x_0  \\
+x(t) = \frac{m}{k} Vcos(\theta)(1 - e^{-\frac{k}{m}t}) + x_0  \\
 y(t) = \frac{m}{k} (Vsin(\theta) + \frac{m}{k}g) (1- e^{-\frac{k}{m}t}) -\frac{m}{k}gt + y_0
 \end{cases}
 $$
 
-These two equations will serve as a benchmark for testing the accuracy of Euler's method, since analytical solutions will no longer be possible once quadratic drag is introduced. Consequently, we will have to rely on numerical approximations of the solution.
+These two equations will serve as a benchmark for testing the accuracy of Euler's method, since analytical solutions will no longer be possible once quadratic drag is introduced. Consequently, we will have to rely on numerical approximations of the solution.  
+the implementation of this model as well as the comparison between Euler's approximation and the analytical solution can be found in "models/linear_drag.py"
