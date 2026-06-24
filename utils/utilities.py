@@ -56,3 +56,14 @@ def position_from_velocity_ode(f, a, b, h, initial_v, initial_pos):
     positions = euler_integral(Velocity, h, initial_pos)
     return positions
 
+# Redifining a new function implementing Euler's method with a a function taking 
+# the state vector instead of an integer as parameter.
+def euler_vectorial(f, a, b, h, initial):
+    t = a
+    state = initial
+    points = []
+    while t < b :
+        points.append(state)
+        state = state + h*f(state)
+        t = t + h
+    return np.array(points)
