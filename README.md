@@ -4,6 +4,7 @@ A simulation of bullet trajectories with increasing levels of accuracy and compl
 ## Table of Contents
 - [1. Ideal model (no drag)](#1-ideal-model-no-drag)
 - [2. Linear drag model](#2-linear-drag-model)
+- [3. Quadratic drag model](#3-quadratic-drag)
 
 ## 1. Ideal model (no drag)
 
