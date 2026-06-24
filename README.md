@@ -183,5 +183,33 @@ y(t) = \frac{m}{k} (Vsin(\theta) + \frac{m}{k}g) (1- e^{-\frac{k}{m}t}) -\frac{m
 \end{cases}
 $$
 
-These two equations will serve as a benchmark for testing the accuracy of Euler's method, since analytical solutions will no longer be possible once quadratic drag is introduced. Consequently, we will have to rely on numerical approximations of the solution.  
+These two equations will serve as a benchmark for testing the accuracy of Euler's method, since analytical solutions will no longer be easily obtained once quadratic drag is introduced. Consequently, we will have to rely on numerical approximations of the solution.  
 the implementation of this model as well as the comparison between Euler's approximation and the analytical solution can be found in "models/linear_drag.py"
+
+## 3. Quadratic drag
+
+as explained previously, the linear drag model is inacurate at high speed. to accuratly account for the drag at bullet speeds, we must consider quadratic drag, such as : 
+
+$$
+F_d = -k \vec{V}|V|
+$$
+
+when considering this drag, Newton's second law becomes : 
+
+$$
+\sum \vec{F_{ext}} = \vec{P} - k\vec{V}|V| = m\vec{a}
+$$ 
+
+from which we can derive the two component equations : 
+
+$$
+\begin{cases}
+\frac{dV_x}{dt} = - \frac{k}{m}|V|V_x \\
+\frac{dV_y}{dt} = - \frac{k}{m}|V|V_y -g 
+\end{cases}
+$$ 
+
+these equations are coupled, non linear, non homgenous ODEs and do not admit straightforward closed form solutions, we will thus use Euler's approximation to numerically solve them.
+
+
+
