@@ -86,8 +86,9 @@ Using these expressions, I wrote code that calculated the trajectory in "Ideal.p
 ## 2. Linear drag Model
 
 Considering the fact that air resistance plays an important role in the trajectory at high speeds, we will first introduce linear drag to our model.
-Even though quadratic drag is more physically accurate at high velocities, we start with a linear drag model mainly as a benchmark against which to test different numerical methods to solve ODEs, since analytically solving them will quickly become impractical.
-the updated equation gives us :  
+Even though quadratic drag is more physically accurate at high velocities, we start with a linear drag model mainly as a benchmark against which to test different numerical methods to solve ODEs, since analytically solving them will quickly become impractical.  
+
+The updated equation gives us:  
 
 $$
 \sum \vec{F_{ext}} = \vec{P} - k\vec{v} = m\vec{a}
@@ -102,7 +103,7 @@ ma_y = -mg - kv_y
 \end{cases}
 $$
 
-These differential equations are still analytically solvable. We will use these solutions as benchmarks for validating the accuracy of our numerical methods later.
+These differential equations are still analytically solvable. We will use these solutions as benchmarks to validate the accuracy of our numerical methods later.
 
 We can rewrite these two equations as: 
 
@@ -113,7 +114,7 @@ m\frac{dv_y}{dt} = -mg - kv_y
 \end{cases}
 $$
 
-i.e. 
+i.e., 
 
 $$
 \begin{cases}
@@ -122,25 +123,25 @@ $$
 \end{cases}
 $$
 
-The first equation is a homogeneous ODE, solving it yields: 
+The first equation is a homogeneous ODE; solving it yields: 
 
 $$
 v_x(t) = \Delta e^{-\frac{k}{m}t}
 $$
 
-The second one is a non homogeneous ODE, we must first solve the homogeneous equation  $\frac{dv_y}{dt} + \frac{k}{m}v_y = 0$, which is the same one as the first equation, therefore : 
+The second one is a nonhomogeneous ODE. We must first solve the homogeneous equation  $\frac{dv_y}{dt} + \frac{k}{m}v_y = 0$; which is the same as the first equation, therefore: 
 
 $$
 v_{yh}(t) = C e^{-\frac{k}{m}t}
 $$
 
-and by noticing that $v_{yp} : t \mapsto - \frac{m}{k}g$ is a particular solution of the equation, we can conclude that $v_y$ is such as : 
+Observing that $v_{yp} : t \mapsto - \frac{m}{k}g$ is a particular solution of the equation, we can conclude that $v_y$ is given by: 
 
 $$
 v_{y}(t) = C e^{-\frac{k}{m}t} -\frac{m}{k}g
 $$
 
-which gives us these two equations : 
+Which yields the speed equations:
 
 $$
 \begin{cases}
@@ -149,7 +150,7 @@ v_{y}(t) = C e^{-\frac{k}{m}t} -\frac{m}{k}g
 \end{cases}
 $$
 
-knowing that : 
+Knowing that: 
 
 $$
 \begin{cases}
@@ -158,7 +159,7 @@ v_{y0} = vsin(\theta)
 \end{cases}
 $$
 
-we can conclude with the two speed equations : 
+We can conclude with the two completed speed equations: 
 
 $$
 \begin{cases}
@@ -167,7 +168,7 @@ v_{y}(t) = (vsin(\theta) + \frac{m}{k}g) e^{-\frac{k}{m}t} -\frac{m}{k}g
 \end{cases}
 $$
 
-integrating in respect to time yields the position equations bellow : 
+Integrating in respect to time yields the position equations bellow: 
 
 $$
 \begin{cases}
@@ -176,7 +177,7 @@ y(t) = -\frac{m}{k} (vsin(\theta) + \frac{m}{k}g) e^{-\frac{k}{m}t} -\frac{m}{k}
 \end{cases}
 $$
 
-and finally : 
+And finally: 
 
 $$
 \begin{cases}
