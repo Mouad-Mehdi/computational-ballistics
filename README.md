@@ -4,7 +4,7 @@ A simulation of bullet trajectories with increasing levels of accuracy and compl
 ## Table of Contents
 - [1. Ideal model (no drag)](#1-ideal-model-no-drag)
 - [2. Linear drag model](#2-linear-drag-model)
-- [3. Quadratic drag model](#3-quadratic-drag)
+- [3. Quadratic drag model](#3-quadratic-drag-model)
 
 ## 1. Ideal model (no drag)
 
@@ -27,7 +27,7 @@ $$
 m\vec{a} = m\vec{g}
 $$
 
-Thies yields us the two component equations  
+Thies yields the two component equations:  
 
 $$
 \begin{cases}
@@ -36,7 +36,7 @@ a_y = -g
 \end{cases}
 $$
 
-Integrating with respect to time gives 
+Integrating with respect to time gives: 
 
 $$
 \begin{cases}
@@ -45,7 +45,7 @@ v_y = -gt + v_{y0}
 \end{cases}
 $$
 
-With 
+With: 
 
 $$
 \begin{cases}
@@ -54,7 +54,7 @@ v_{y0} = vsin(\theta)
 \end{cases}
 $$
 
-Integrating once more yields the position 
+Integrating once more yields the position: 
 
 $$
 \begin{cases}
@@ -69,7 +69,7 @@ $$
 0 = -\frac{g}{2}t_{flight}^2 + vsin(\theta)t_{flight} + y_0
 $$
 
-Using the quadratic formula
+Using the quadratic formula:
 
 $$
 t_{flight} = \frac{v\sin(\theta) \pm \sqrt{v^2\sin^2(\theta) + 2gy_0}}{g}
@@ -83,16 +83,20 @@ $$
 
 Using these expressions, I wrote code that calculated the trajectory in "Ideal.py" and represented it in Cartesian coordinates with NumPy.
 
+
 ## 2. Linear drag Model
 
-Considering the fact that air resistance plays an important role in the trajectory at high speeds, we will first introduce linear drag to our model.
-Even though quadratic drag is more physically accurate at high velocities, we start with a linear drag model mainly as a benchmark against which to test different numerical methods to solve ODEs, since analytically solving them will quickly become impractical.  
+
+Considering the fact that air resistance plays an important role in the trajectory at high speeds, we will first introduce a linear drag model.
+Even though quadratic drag is more physically accurate at high velocities, we start with a linear drag model mainly as a benchmark against which to test different numerical methods to solve ODEs, since obtaining analytical solutions will quickly become impractical.  
 
 The updated equation gives us:  
 
 $$
 \sum \vec{F_{ext}} = \vec{P} - k\vec{v} = m\vec{a}
 $$ 
+
+Where k is the drag coeficient in $kgs^{-1}$
 
 From this we can again derive two differential equations: 
 
@@ -141,7 +145,7 @@ $$
 v_{y}(t) = C e^{-\frac{k}{m}t} -\frac{m}{k}g
 $$
 
-Which yields the speed equations:
+Which yields the velocity equations:
 
 $$
 \begin{cases}
@@ -150,7 +154,7 @@ v_{y}(t) = C e^{-\frac{k}{m}t} -\frac{m}{k}g
 \end{cases}
 $$
 
-Knowing that: 
+Using the initial conditions: 
 
 $$
 \begin{cases}
@@ -168,7 +172,7 @@ v_{y}(t) = (vsin(\theta) + \frac{m}{k}g) e^{-\frac{k}{m}t} -\frac{m}{k}g
 \end{cases}
 $$
 
-Integrating in respect to time yields the position equations bellow: 
+Integrating with respect to time yields the position equations below: 
 
 $$
 \begin{cases}
@@ -186,10 +190,13 @@ y(t) = \frac{m}{k} (vsin(\theta) + \frac{m}{k}g) (1- e^{-\frac{k}{m}t}) -\frac{m
 \end{cases}
 $$
 
-These two equations will serve as a benchmark for testing the accuracy of Euler's method, since analytical solutions will no longer be easily obtained once quadratic drag is introduced. Consequently, we will have to rely on numerical approximations of the solution.  
-the implementation of this model as well as the comparison between Euler's approximation and the analytical solution can be found in "models/linear_drag.py"
+These analytical solutions provide a reference against which numerical methods such as Eulerand Runge–Kutta methods can be evaluated. we will have to rely on numerical approximations of the solutions once quadratic drag is introdced, since analytical solutions will no longer be easily obtained.
 
-## 3. Quadratic drag
+The implementation of this model as well as the comparison between Euler's method and the analytical solution can be found in "models/linear_drag.py"
+
+
+## 3. Quadratic Drag Model
+
 
 As explained previously, the linear drag model is inaccurate at high speeds. To accurately account for air resistance at bullet speeds, we consider quadratic drag, defined by
 
@@ -197,19 +204,19 @@ $$
 F_d = -k \vec{v}|v|
 $$
 
-Where 
+Where: 
 
 $$
 |v| = \sqrt{v_x^2 + v_y^2}
 $$
 
-When considering this drag force, Newton's second law becomes 
+When considering this drag force, Newton's second law becomes: 
 
 $$
 \sum \vec{F_{ext}} = \vec{P} - k\vec{v}|v| = m\vec{a}
 $$ 
 
-This yields the component equations 
+This yields the component equations: 
 
 $$
 \begin{cases}
