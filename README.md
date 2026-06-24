@@ -85,15 +85,15 @@ Using these expressions, I wrote code that calculated the trajectory in "Ideal.p
 
 ## 2. Linear drag Model
 
-here we introduce linear drag to our model, since assuming no drag at such speeds is unrealistic.  
-We start with a linear drag model for analytical tractability, even though quadratic drag is more physically accurate at bullet velocities. This serves as an intermediate step that can still be solved analytically before introducing the quadratic model, which requires numerical integration.
+Considering the fact that air resistance plays an important role in the trajectory at high speeds, we will first introduce linear drag to our model.
+Even though quadratic drag is more physically accurate at high velocities, we start with a linear drag model mainly as a benchmark against which to test different numerical methods to solve ODEs, since analytically solving them will quickly become impractical.
 the updated equation gives us :  
 
 $$
 \sum \vec{F_{ext}} = \vec{P} - k\vec{v} = m\vec{a}
 $$ 
 
-from this we can again derive two differential equations : 
+From this we can again derive two differential equations: 
 
 $$
 \begin{cases}
@@ -102,9 +102,9 @@ ma_y = -mg - kv_y
 \end{cases}
 $$
 
-these differential equations are still analytically solvable. we will use these solutions as benchmarks for validating the accuracy of our numerical methods later.
+These differential equations are still analytically solvable. We will use these solutions as benchmarks for validating the accuracy of our numerical methods later.
 
-we can rewrite these two equations as : 
+We can rewrite these two equations as: 
 
 $$
 \begin{cases}
@@ -113,7 +113,7 @@ m\frac{dv_y}{dt} = -mg - kv_y
 \end{cases}
 $$
 
-i.e 
+i.e. 
 
 $$
 \begin{cases}
@@ -122,13 +122,13 @@ $$
 \end{cases}
 $$
 
-the first equation is a homogeneous ODE, solving it yields : 
+The first equation is a homogeneous ODE, solving it yields: 
 
 $$
 v_x(t) = \Delta e^{-\frac{k}{m}t}
 $$
 
-the second one is a non homogeneous ODE, we must first solve the homogeneous equation  $\frac{dv_y}{dt} + \frac{k}{m}v_y = 0$, which is the same one as the first equation, therefore : 
+The second one is a non homogeneous ODE, we must first solve the homogeneous equation  $\frac{dv_y}{dt} + \frac{k}{m}v_y = 0$, which is the same one as the first equation, therefore : 
 
 $$
 v_{yh}(t) = C e^{-\frac{k}{m}t}
