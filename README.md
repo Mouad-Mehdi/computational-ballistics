@@ -7,7 +7,7 @@ A simulation of bullet trajectories with increasing levels of accuracy and compl
 
 ## 1. Ideal model (no drag)
 
-We first assume an object of mass m that is launched from the point $(x_0,y_0)$ with speed V and angle $\theta$  
+We first assume an object of mass m that is launched from the point $(x_0,y_0)$ with speed v and angle $\theta$  
 from Newton's second law, we know that
 
 $$
@@ -39,8 +39,8 @@ integrating with respect to time gives :
 
 $$
 \begin{cases}
-V_x = V_{x0} \\
-V_y = -gt + V_{y0}
+v_x = v_{x0} \\
+v_y = -gt + v_{y0}
 \end{cases}
 $$
 
@@ -48,8 +48,8 @@ with :
 
 $$
 \begin{cases}
-V_{x0} = Vcos(\theta)\\
-V_{y0} = Vsin(\theta)
+v_{x0} = vcos(\theta)\\
+v_{y0} = vsin(\theta)
 \end{cases}
 $$
 
@@ -57,27 +57,27 @@ integrating a second time gives us the position :
 
 $$
 \begin{cases}
-x =  Vcos(\theta)t + x_{0} \\
-y = -\frac{g}{2}t^2 + Vsin(\theta)t + y_0
+x =  vcos(\theta)t + x_{0} \\
+y = -\frac{g}{2}t^2 + vsin(\theta)t + y_0
 \end{cases}
 $$
 
 assuming that ground level is at y = 0, we can calculate the flight time by plugging y = 0 in our equation :
 
 $$
-0 = -\frac{g}{2}t_{flight}^2 + Vsin(\theta)t_{flight} + y_0
+0 = -\frac{g}{2}t_{flight}^2 + vsin(\theta)t_{flight} + y_0
 $$
 
 which gives us : 
 
 $$
-t_{flight} = \frac{V\sin(\theta) \pm \sqrt{V^2\sin^2(\theta) + 2gy_0}}{g}
+t_{flight} = \frac{v\sin(\theta) \pm \sqrt{v^2\sin^2(\theta) + 2gy_0}}{g}
 $$
 
 taking the positive root, we have : 
 
 $$
-t_{flight} = \frac{V\sin(\theta) + \sqrt{V^2\sin^2(\theta) + 2gy_0}}{g}
+t_{flight} = \frac{v\sin(\theta) + \sqrt{v^2\sin^2(\theta) + 2gy_0}}{g}
 $$
 
 from these expressions, I wrote a code that represented the trajectory in Cartesian coordinates in "Ideal.py" and represented it on a graph with Numpy.
@@ -89,15 +89,15 @@ We start with a linear drag model for analytical tractability, even though quadr
 the updated equation gives us :  
 
 $$
-\sum \vec{F_{ext}} = \vec{P} - k\vec{V} = m\vec{a}
+\sum \vec{F_{ext}} = \vec{P} - k\vec{v} = m\vec{a}
 $$ 
 
 from this we can again derive two differential equations : 
 
 $$
 \begin{cases}
-ma_x = -kV_x \\
-ma_y = -mg - kV_y
+ma_x = -kv_x \\
+ma_y = -mg - kv_y
 \end{cases}
 $$
 
@@ -107,8 +107,8 @@ we can rewrite these two equations as :
 
 $$
 \begin{cases}
-m\frac{dV_x}{dt} = -kV_x \\
-m\frac{dV_y}{dt} = -mg - kV_y
+m\frac{dv_x}{dt} = -kv_x \\
+m\frac{dv_y}{dt} = -mg - kv_y
 \end{cases}
 $$
 
@@ -116,34 +116,34 @@ i.e
 
 $$
 \begin{cases}
-\frac{dV_x}{dt} = -\frac{k}{m}V_x \\
-\frac{dV_y}{dt} = -g - \frac{k}{m}V_y
+\frac{dv_x}{dt} = -\frac{k}{m}v_x \\
+\frac{dv_y}{dt} = -g - \frac{k}{m}v_y
 \end{cases}
 $$
 the first equation is a homogeneous ODE, solving it yields : 
 
 $$
-V_x(t) = \Delta e^{-\frac{k}{m}t}
+v_x(t) = \Delta e^{-\frac{k}{m}t}
 $$
 
-the second one is a non homogeneous ODE, we must first solve the homogeneous equation  $\frac{dV_y}{dt} + \frac{k}{m}V_y = 0$, which is the same one as the first equation, therefore : 
+the second one is a non homogeneous ODE, we must first solve the homogeneous equation  $\frac{dv_y}{dt} + \frac{k}{m}v_y = 0$, which is the same one as the first equation, therefore : 
 
 $$
-V_{yh}(t) = C e^{-\frac{k}{m}t}
+v_{yh}(t) = C e^{-\frac{k}{m}t}
 $$
 
-and by noticing that $V_{yp} : t \mapsto - \frac{m}{k}g$ is a particular solution of the equation, we can conclude that $V_y$ is such as : 
+and by noticing that $v_{yp} : t \mapsto - \frac{m}{k}g$ is a particular solution of the equation, we can conclude that $v_y$ is such as : 
 
 $$
-V_{y}(t) = C e^{-\frac{k}{m}t} -\frac{m}{k}g
+v_{y}(t) = C e^{-\frac{k}{m}t} -\frac{m}{k}g
 $$
 
 which gives us these two equations : 
 
 $$
 \begin{cases}
-V_x(t) = \Delta e^{-\frac{k}{m}t} \\
-V_{y}(t) = C e^{-\frac{k}{m}t} -\frac{m}{k}g
+v_x(t) = \Delta e^{-\frac{k}{m}t} \\
+v_{y}(t) = C e^{-\frac{k}{m}t} -\frac{m}{k}g
 \end{cases}
 $$
 
@@ -151,8 +151,8 @@ knowing that :
 
 $$
 \begin{cases}
-V_{x0} = Vcos(\theta) \\
-V_{y0} = Vsin(\theta)
+v_{x0} = vcos(\theta) \\
+v_{y0} = vsin(\theta)
 \end{cases}
 $$
 
@@ -160,8 +160,8 @@ we can conclude with the two speed equations :
 
 $$
 \begin{cases}
-V_x(t) = Vcos(\theta) e^{-\frac{k}{m}t} \\
-V_{y}(t) = (Vsin(\theta) + \frac{m}{k}g) e^{-\frac{k}{m}t} -\frac{m}{k}g
+v_x(t) = vcos(\theta) e^{-\frac{k}{m}t} \\
+v_{y}(t) = (vsin(\theta) + \frac{m}{k}g) e^{-\frac{k}{m}t} -\frac{m}{k}g
 \end{cases}
 $$
 
@@ -169,8 +169,8 @@ integrating in respect to time yields the position equations bellow :
 
 $$
 \begin{cases}
-x(t) = -\frac{m}{k} Vcos(\theta) e^{-\frac{k}{m}t} + C \\
-y(t) = -\frac{m}{k} (Vsin(\theta) + \frac{m}{k}g) e^{-\frac{k}{m}t} -\frac{m}{k}gt + C
+x(t) = -\frac{m}{k} vcos(\theta) e^{-\frac{k}{m}t} + C \\
+y(t) = -\frac{m}{k} (vsin(\theta) + \frac{m}{k}g) e^{-\frac{k}{m}t} -\frac{m}{k}gt + C
 \end{cases}
 $$
 
@@ -178,8 +178,8 @@ and finally :
 
 $$
 \begin{cases}
-x(t) = \frac{m}{k} Vcos(\theta)(1 - e^{-\frac{k}{m}t}) + x_0  \\
-y(t) = \frac{m}{k} (Vsin(\theta) + \frac{m}{k}g) (1- e^{-\frac{k}{m}t}) -\frac{m}{k}gt + y_0
+x(t) = \frac{m}{k} vcos(\theta)(1 - e^{-\frac{k}{m}t}) + x_0  \\
+y(t) = \frac{m}{k} (vsin(\theta) + \frac{m}{k}g) (1- e^{-\frac{k}{m}t}) -\frac{m}{k}gt + y_0
 \end{cases}
 $$
 
@@ -191,27 +191,27 @@ the implementation of this model as well as the comparison between Euler's appro
 As explained previously, the linear drag model is inaccurate at high speeds. To accurately account for air resistance at bullet speeds, we consider quadratic drag, defined by
 
 $$
-F_d = -k \vec{V}|V|
+F_d = -k \vec{v}|v|
 $$
 
 Where 
 
 $$
-|V| = \sqrt{V_x^2 + V_y^2}
+|v| = \sqrt{v_x^2 + v_y^2}
 $$
 
 When considering this drag force, Newton's second law becomes 
 
 $$
-\sum \vec{F_{ext}} = \vec{P} - k\vec{V}|V| = m\vec{a}
+\sum \vec{F_{ext}} = \vec{P} - k\vec{v}|v| = m\vec{a}
 $$ 
 
-This yields the comoponent equations 
+This yields the component equations 
 
 $$
 \begin{cases}
-\frac{dV_x}{dt} = - \frac{k}{m}|V|V_x \\
-\frac{dV_y}{dt} = - \frac{k}{m}|V|V_y -g 
+\frac{dv_x}{dt} = - \frac{k}{m}|v|v_x \\
+\frac{dv_y}{dt} = - \frac{k}{m}|v|v_y -g 
 \end{cases}
 $$ 
 
