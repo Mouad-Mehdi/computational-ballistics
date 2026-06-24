@@ -120,6 +120,7 @@ $$
 \frac{dv_y}{dt} = -g - \frac{k}{m}v_y
 \end{cases}
 $$
+
 the first equation is a homogeneous ODE, solving it yields : 
 
 $$
