@@ -16,7 +16,7 @@ x0 = 0 # Initial
 y0 = 0 # Initial height
 
 # Euler's approximation parameters :
-h = 0.1
+h = 0.001
 
 def y(t) : # Vertical positional equation
     return y0 + (m/k)*(v*np.sin(theta) + m*g/k)*(1 - np.exp(-k*t/m)) -m*g*t/k
