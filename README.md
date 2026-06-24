@@ -8,26 +8,26 @@ A simulation of bullet trajectories with increasing levels of accuracy and compl
 
 ## 1. Ideal model (no drag)
 
-We first assume an object of mass m that is launched from the point $(x_0,y_0)$ with speed v and angle $\theta$  
-from Newton's second law, we know that
+The objective of this project being to model the trajectory of a bullet,we first assume an idealized object of mass (m) that is launched from the point $(x_0,y_0)$ with speed v and at angle $\theta$  
+From Newton's second law, we know that
 
 $$
 \sum \vec{F_{ext}} = m\vec{a}
 $$
 
-assuming that the only force exerted on the object is its weight, so we can derive that :  
+Assuming that the only force exerted on the projectile is its weight , we can derive that   
 
 $$
 \sum \vec{F_{ext}} = \vec{P} = m\vec{a}
 $$ 
 
-given that $\vec{P} = m\vec{g}$, we can conclude that :  
+Given that $\vec{P} = m\vec{g}$, we can conclude  
 
 $$
 m\vec{a} = m\vec{g}
 $$
 
-from this we can derive two equations :  
+Thies yields us the two component equations  
 
 $$
 \begin{cases}
@@ -36,7 +36,7 @@ a_y = -g
 \end{cases}
 $$
 
-integrating with respect to time gives : 
+Integrating with respect to time gives 
 
 $$
 \begin{cases}
@@ -45,7 +45,7 @@ v_y = -gt + v_{y0}
 \end{cases}
 $$
 
-with : 
+With 
 
 $$
 \begin{cases}
@@ -54,7 +54,7 @@ v_{y0} = vsin(\theta)
 \end{cases}
 $$
 
-integrating a second time gives us the position : 
+Integrating once more yields the position 
 
 $$
 \begin{cases}
@@ -63,25 +63,25 @@ y = -\frac{g}{2}t^2 + vsin(\theta)t + y_0
 \end{cases}
 $$
 
-assuming that ground level is at y = 0, we can calculate the flight time by plugging y = 0 in our equation :
+Assuming that ground level is at y = 0, we can calculate the flight time by solving the equation y(t) = 0
 
 $$
 0 = -\frac{g}{2}t_{flight}^2 + vsin(\theta)t_{flight} + y_0
 $$
 
-which gives us : 
+Using the quadratic formula
 
 $$
 t_{flight} = \frac{v\sin(\theta) \pm \sqrt{v^2\sin^2(\theta) + 2gy_0}}{g}
 $$
 
-taking the positive root, we have : 
+We take the positive root, since time cannot be negative. The flight time is thus:
 
 $$
 t_{flight} = \frac{v\sin(\theta) + \sqrt{v^2\sin^2(\theta) + 2gy_0}}{g}
 $$
 
-from these expressions, I wrote a code that represented the trajectory in Cartesian coordinates in "Ideal.py" and represented it on a graph with Numpy.
+Using these expressions, I wrote code that calculated the trajectory in "Ideal.py" and represented it in Cartesian coordinates with NumPy.
 
 ## 2. Linear drag Model
 
