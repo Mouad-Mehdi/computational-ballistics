@@ -6,8 +6,8 @@ from utils.utilities import plot_trajectory
 g = 9.8 # Gravitational acceleration
 
 # Initial conditions : 
-v = 400 # Launch speed in m/s
-theta = np.radians(45) # Launch angle 
+v = 850 # Launch speed in m/s
+theta = np.radians(34) # Launch angle 
 x0 = 0 # Initial
 y0 = 0 # Initial height
 
@@ -26,3 +26,4 @@ X = x(flight_points)
 Y = y(flight_points)
 
 plot_trajectory(X, Y, x0, y0, "Ideal trajectory")
+
