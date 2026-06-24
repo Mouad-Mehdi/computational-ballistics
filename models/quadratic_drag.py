@@ -17,7 +17,7 @@ x0 = 0 # Initial
 y0 = 0 # Initial height
 
 # Euler's approximation parameters :
-h = 0.1
+h = 0.001
 
 # Auxiliary function to numercially solve the ODE :
 def f(state):
