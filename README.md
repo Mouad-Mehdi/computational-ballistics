@@ -188,19 +188,25 @@ the implementation of this model as well as the comparison between Euler's appro
 
 ## 3. Quadratic drag
 
-as explained previously, the linear drag model is inacurate at high speed. to accuratly account for the drag at bullet speeds, we must consider quadratic drag, such as : 
+As explained previously, the linear drag model is inaccurate at high speeds. To accurately account for air resistance at bullet speeds, we consider quadratic drag, defined by
 
 $$
 F_d = -k \vec{V}|V|
 $$
 
-when considering this drag, Newton's second law becomes : 
+Where 
+
+$$
+|V| = \sqrt{V_x^2 + V_y^2}
+$$
+
+When considering this drag force, Newton's second law becomes 
 
 $$
 \sum \vec{F_{ext}} = \vec{P} - k\vec{V}|V| = m\vec{a}
 $$ 
 
-from which we can derive the two component equations : 
+This yields the comoponent equations 
 
 $$
 \begin{cases}
@@ -209,7 +215,7 @@ $$
 \end{cases}
 $$ 
 
-these equations are coupled, non linear, non homgenous ODEs and do not admit straightforward closed form solutions, we will thus use Euler's approximation to numerically solve them.
+These equations form a system of coupled nonlinear, nonhomogeneous ordinary differential equations. Since no simple closed-form solution exists for the general case, Euler's method will be used to obtain a numerical approximation of the trajectory.
 
 
 
