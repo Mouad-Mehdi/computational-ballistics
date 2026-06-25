@@ -1,9 +1,6 @@
-import matplotlib.pyplot as plt 
 import numpy as np
-from scipy.optimize import brentq
-from utils.utilities import plot_trajectory
-from utils.utilities import euler_vectorial
-from utils.utilities import euler_integral
+import utils.utilities as ut
+
 
 # Physical parameters : 
 g = 9.8 # Gravitational acceleration
@@ -16,26 +13,44 @@ theta = np.radians(34) # Launch angle
 x0 = 0 # Initial
 y0 = 0 # Initial height
 
+# State vector is of the form [vx, vy, x, y]
+initial_state = np.array([v*np.cos(theta), v*np.sin(theta), x0, y0])
+
 # Euler's approximation parameters :
-h = 0.001
+h = 0.01
+
 
 # Auxiliary function to numercially solve the ODE :
 def f(state):
-    vx, vy = state
-    return np.array([(-k/m)*np.sqrt(vx**2 + vy**2)*vx , (-k/m)*np.sqrt(vx**2 + vy**2)*vy -g])
+    vx, vy, x, y = state
+    speed = np.sqrt(vx**2 + vy**2)
+    return np.array([(-k/m)*speed*vx , (-k/m)*speed*vy -g, vx, vy])
 
 # A generous upperbound for the flight time, given that drag can only reduce it : 
 t_max_guess = (v*np.sin(theta) + np.sqrt((v*np.sin(theta))**2 + 2*g*y0)) / g 
 
-states = euler_vectorial(f,0,t_max_guess,h,np.array([v*np.cos(theta),v*np.sin(theta)]))
+# Calculating the array of state vectors using Euler's method
+states_euler = ut.euler(f,0,t_max_guess,h,initial_state)
 
-# Calculating an approximation of x(flight_points) using Euler's method
-X_euler = euler_integral(states[:,0],h,x0)
+# Calculating the array of state vectors using RK4
+states_rk4 = ut.rk4(f,0,t_max_guess,h,initial_state)
 
-# Calculating an approximation of y(flight_points) using Euler's method, given that dv_y/dt = (-k/m)*v_y -g
-Y_euler = euler_integral(states[:,1],h,y0)
+# Extracting the coordinates for the state vector array
+X_euler = states_euler[:,2]
+X_rk4 = states_rk4[:,2]
+Y_euler = states_euler[:,3]
+Y_rk4 = states_rk4[:,3]
 
 # Only taking the positions above ground
-mask = Y_euler >= 0
+mask_euler = Y_euler >= 0
+mask_rk4 = Y_rk4 >= 0
 
-plot_trajectory(X_euler[mask], Y_euler[mask], x0, y0, "Bullet trajectory under quadratic drag")
+ut.plot_trajectory_comp(X_euler[mask_euler], 
+                        Y_euler[mask_euler], 
+                        X_rk4[mask_rk4], 
+                        Y_rk4[mask_rk4], 
+                        x0, 
+                        y0, 
+                        "y(x) under quadratic drag", 
+                        "Euler's approximation", 
+                        "RK4 approximation")
