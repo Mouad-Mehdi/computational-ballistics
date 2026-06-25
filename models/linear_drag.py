@@ -17,8 +17,8 @@ y0 = 0 # Initial height
 # State vector is of form [vx, vy, x, y]
 initial_state = np.array([v*np.cos(theta), v*np.sin(theta), x0, y0])
 
-# Euler's approximation parameters :
-h = 0.01
+# Numerical solvers parameters :
+h = 0.1
 
 def y(t) : # Vertical positional equation
     return y0 + (m/k)*(v*np.sin(theta) + m*g/k)*(1 - np.exp(-k*t/m)) -m*g*t/k
@@ -32,19 +32,17 @@ t_max_guess = (v*np.sin(theta) + np.sqrt((v*np.sin(theta))**2 + 2*g*y0)) / g
 t_flight = brentq(y,1e-3,t_max_guess) 
 
 # Auxiliary function
-def f(state):
+def f(t,state):
     vx, vy, x, y = state
     return np.array([(-k/m)*vx, (-k/m)*vy -g, vx, vy ])
 
-# Calculating the state array using Euler's approximation
-states = ut.euler(f,0,t_flight,h,initial_state)
+# Calculating the state array and the time array using Euler's approximation
+flight_points, states = ut.euler(f,0,t_flight,h,initial_state)
 
-# Extracting the coordinates from the state vector array
+# Extracting the coordinates :
 X_euler = states[:,2]
 Y_euler = states[:,3]
 
-
-flight_points = np.arange(0,t_flight,h)
 
 X = x(flight_points)
 Y = y(flight_points)
