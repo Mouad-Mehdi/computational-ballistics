@@ -86,7 +86,7 @@ Using these expressions, I wrote code that calculated the trajectory in "Ideal.p
 
 ## 2. Linear drag Model
 
-
+### Analytically solving the system
 Considering the fact that air resistance plays an important role in the trajectory at high speeds, we will first introduce a linear drag model.
 Even though quadratic drag is more physically accurate at high velocities, we start with a linear drag model mainly as a benchmark against which to test different numerical methods to solve ODEs, since obtaining analytical solutions will quickly become impractical.  
 
@@ -191,6 +191,19 @@ y(t) = \frac{m}{k} (vsin(\theta) + \frac{m}{k}g) (1- e^{-\frac{k}{m}t}) -\frac{m
 $$
 
 These analytical solutions provide a reference against which numerical methods such as Euler and Runge–Kutta methods can be evaluated. we will have to rely on numerical approximations of the solutions once quadratic drag is introduced, since analytical solutions will no longer be easily obtained.
+
+### Euler's method
+
+Euler's method is a numerical technique for solving differential equations and works as follows:
+Suppose we have a differential equation $$\frac{dy}{dx} = f(x,y)$$ with initial conditions $$(x_0,y_0)$$   
+given a step size "h", we can compute successive approximations of y with the following formula:  
+
+$$
+\begin{cases}
+y_{n+1} = y_n + hf(x_n,y_n) \\
+x_{n+1} = x_n + h
+\end{cases}
+$$
 
 The implementation of this model as well as the comparison between Euler's method and the analytical solution can be found in "models/linear_drag.py"
 
