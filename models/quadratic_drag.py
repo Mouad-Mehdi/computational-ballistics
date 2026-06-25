@@ -16,12 +16,11 @@ y0 = 0 # Initial height
 # State vector is of the form [vx, vy, x, y]
 initial_state = np.array([v*np.cos(theta), v*np.sin(theta), x0, y0])
 
-# Euler's approximation parameters :
+# Numerical solvers parameters :
 h = 0.01
 
-
 # Auxiliary function to numercially solve the ODE :
-def f(state):
+def f(t,state):
     vx, vy, x, y = state
     speed = np.sqrt(vx**2 + vy**2)
     return np.array([(-k/m)*speed*vx , (-k/m)*speed*vy -g, vx, vy])
@@ -30,10 +29,10 @@ def f(state):
 t_max_guess = (v*np.sin(theta) + np.sqrt((v*np.sin(theta))**2 + 2*g*y0)) / g 
 
 # Calculating the array of state vectors using Euler's method
-states_euler = ut.euler(f,0,t_max_guess,h,initial_state)
+states_euler = ut.euler(f,0,t_max_guess,h,initial_state)[1]
 
 # Calculating the array of state vectors using RK4
-states_rk4 = ut.rk4(f,0,t_max_guess,h,initial_state)
+states_rk4 = ut.rk4(f,0,t_max_guess,h,initial_state)[1]
 
 # Extracting the coordinates from the state vector array
 X_euler = states_euler[:,2]
