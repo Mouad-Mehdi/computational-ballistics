@@ -27,7 +27,7 @@ $$
 m\vec{a} = m\vec{g}
 $$
 
-Thies yields the two component equations:  
+This yields the two component equations:  
 
 $$
 \begin{cases}
@@ -96,7 +96,7 @@ $$
 \sum \vec{F_{ext}} = \vec{P} - k\vec{v} = m\vec{a}
 $$ 
 
-Where k is the drag coeficient in $kgs^{-1}$
+Where k is the drag coefficient in $kgs^{-1}$
 
 From this we can again derive two differential equations: 
 
@@ -190,7 +190,7 @@ y(t) = \frac{m}{k} (vsin(\theta) + \frac{m}{k}g) (1- e^{-\frac{k}{m}t}) -\frac{m
 \end{cases}
 $$
 
-These analytical solutions provide a reference against which numerical methods such as Eulerand Runge–Kutta methods can be evaluated. we will have to rely on numerical approximations of the solutions once quadratic drag is introdced, since analytical solutions will no longer be easily obtained.
+These analytical solutions provide a reference against which numerical methods such as Euler and Runge–Kutta methods can be evaluated. we will have to rely on numerical approximations of the solutions once quadratic drag is introduced, since analytical solutions will no longer be easily obtained.
 
 The implementation of this model as well as the comparison between Euler's method and the analytical solution can be found in "models/linear_drag.py"
 
