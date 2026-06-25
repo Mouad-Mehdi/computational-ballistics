@@ -32,25 +32,49 @@ def plot_trajectory_comp(X1, Y1, X2, Y2, x0 ,y0, title, plot1, plot2):
 # the state vector instead of an integer as parameter.
 def euler(f, a, b, h, initial):
     t = a
-    state = initial
+    state = initial.copy()
     points = []
+    times = []
     while t < b :
         points.append(state)
-        state = state + h*f(state)
+        times.append(t)
+        state = state + h*f(t,state)
         t = t + h
-    return np.array(points)
+    return np.array(times), np.array(points)
+
 
 # An implementation of RK4 :
 def rk4(f,a,b,h,initial):
     t = a
-    state = initial
+    state = initial.copy()
     points = []
+    times = []
     while t < b :
         points.append(state)
-        k1 = f(state)
-        k2 = f(state + (h/2) * k1)
-        k3 = f(state + (h/2) * k2)
-        k4 = f(state + h*k3)
+        times.append(t)
+        k1 = f(t, state)
+        k2 = f(t + h/2, state + (h/2) * k1)
+        k3 = f(t + h/2, state + (h/2) * k2)
+        k4 = f(t + h, state + h*k3)
         state = state + (h/6)*(k1 +2*k2 + 2*k3 + k4)
         t = t + h
-    return np.array(points)
+    return np.array(times), np.array(points)
+
+# Ploting the Monte Carlo simulation, state vector is [vx, vy, x, y] :
+def monte_carlo_plot(samples,x0,y0):
+    plt.grid(True)
+    plt.xlabel("Distance (m)")
+    plt.ylabel("Height (m)")
+    plt.axis('equal')
+    plt.scatter(x0, y0, color="red", label="Launch point")
+    plt.title("Monte Carlo simulations")
+    for trajectory in samples :
+        X = trajectory[:,2]
+        Y = trajectory[:,3]
+        mask= Y >= 0
+        X = X[mask]
+        Y = Y[mask]
+        plt.plot(X, Y, color="blue", alpha=0.2)
+    plt.legend()
+    plt.show()
+
