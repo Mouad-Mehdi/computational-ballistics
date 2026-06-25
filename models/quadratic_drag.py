@@ -35,7 +35,7 @@ states_euler = ut.euler(f,0,t_max_guess,h,initial_state)
 # Calculating the array of state vectors using RK4
 states_rk4 = ut.rk4(f,0,t_max_guess,h,initial_state)
 
-# Extracting the coordinates for the state vector array
+# Extracting the coordinates from the state vector array
 X_euler = states_euler[:,2]
 X_rk4 = states_rk4[:,2]
 Y_euler = states_euler[:,3]
