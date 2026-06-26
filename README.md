@@ -205,6 +205,81 @@ x_{n+1} = x_n + h
 \end{cases}
 $$
 
+The reason this approximation works comes from the fact that it is nothing more than the first order Taylors expansion of y : 
+
+$$
+y(x+h) = y(x) + hy'(x) + o(h)
+$$
+
+Taking $x + h = x_{n+1}$ and $x = x_n$ :  
+
+$$
+y(x_{n+1}) = y(x_n) + hy'(x_n) + o(h)
+$$
+
+Since $\frac{dy}{dx} = y' = f(x,y)$, the formula becomes:
+
+$$
+y_{n+1} = y_n + hf(x_n,y_n) + o(h)
+$$
+
+Discarding the o(h), which is an expression negligible in regards to h, gives us Euler's method:
+
+$$
+\begin{cases}
+y_{n+1} = y_n + hf(x_n,y_n) \\
+x_{n+1} = x_n + h
+\end{cases}
+$$
+
+### Numerical application
+
+In our case, the ODE system we are trying to solve is : 
+
+$$
+\begin{cases}
+\frac{dv_x}{dt} = -\frac{k}{m}v_x \\
+\frac{dv_y}{dt} = -g - \frac{k}{m}v_y \\
+\frac{x}{dt} = v_x  \\
+\frac{y}{dt} = v_y 
+\end{cases}
+$$
+
+using Euler's method requires us modeling the state of our system as a state vector:
+
+$$
+\mathbf{s} =
+\begin{bmatrix}
+v_x \\
+v_y \\
+x \\
+y
+\end{bmatrix}
+$$
+
+$\frac{ds}{dt}$ then becomes : 
+
+$$
+\begin{bmatrix}
+\frac{v_x}{dt} \\
+\frac{v_y}{dt} \\
+\frac{dx}{dt} \\
+\frac{dy}{dt}
+\end{bmatrix}
+$$
+
+wich is exactly : 
+
+$$
+\begin{bmatrix}
+-\frac{k}{m}v_x\\
+-g - \frac{k}{m}v_y \\
+v_x \\
+v_y
+\end{bmatrix}
+$$
+
+
 The implementation of this model as well as the comparison between Euler's method and the analytical solution can be found in "models/linear_drag.py"
 
 
