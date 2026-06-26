@@ -194,7 +194,7 @@ These analytical solutions provide a reference against which numerical methods s
 
 ### Euler's method
 
-Euler's method is a numerical technique for solving differential equations and works as follows:
+Euler's method is a numerical technique for solving differential equations and works as follows:   
 Suppose we have a differential equation $$\frac{dy}{dx} = f(x,y)$$ with initial conditions $$(x_0,y_0)$$   
 given a step size "h", we can compute successive approximations of y with the following formula:  
 
@@ -205,25 +205,25 @@ x_{n+1} = x_n + h
 \end{cases}
 $$
 
-The reason this approximation works comes from the fact that it is nothing more than the first order Taylors expansion of y : 
+This approximation comes directly from the first-order Taylor expansion of y : 
 
 $$
-y(x+h) = y(x) + hy'(x) + o(h)
+y(x+h) = y(x) + hy'(x) + O(h^2)
 $$
 
 Taking $x + h = x_{n+1}$ and $x = x_n$ :  
 
 $$
-y(x_{n+1}) = y(x_n) + hy'(x_n) + o(h)
+y(x_{n+1}) = y(x_n) + hy'(x_n) + O(h^2)
 $$
 
 Since $\frac{dy}{dx} = y' = f(x,y)$, the formula becomes:
 
 $$
-y_{n+1} = y_n + hf(x_n,y_n) + o(h)
+y(x_{n+1}) = y(x_n) + hf(x_n,y(x_n)) + O(h^2)
 $$
 
-Discarding the o(h), which is an expression negligible in regards to h, gives us Euler's method:
+Neglecting the higher order term $O(h^2)$ yields Euler's method:
 
 $$
 \begin{cases}
@@ -231,6 +231,8 @@ y_{n+1} = y_n + hf(x_n,y_n) \\
 x_{n+1} = x_n + h
 \end{cases}
 $$
+
+It is worth noting that y(x) does not have to be a scalar and can indeed be a vector of dimension n, provided that $f : \mathbb{R}^n \to \mathbb{R}^n$. This will prove usefull in the next section 
 
 ### Numerical application
 
@@ -245,7 +247,7 @@ $$
 \end{cases}
 $$
 
-using Euler's method requires us modeling the state of our system as a state vector:
+Using Euler's method requires us modeling the state of our system as a state vector:
 
 $$
 \mathbf{s} =
@@ -261,14 +263,14 @@ $\frac{ds}{dt}$ then becomes :
 
 $$
 \begin{bmatrix}
-\frac{v_x}{dt} \\
-\frac{v_y}{dt} \\
+\frac{dv_x}{dt} \\
+\frac{dv_y}{dt} \\
 \frac{dx}{dt} \\
 \frac{dy}{dt}
 \end{bmatrix}
 $$
 
-wich is exactly : 
+Which is exactly : 
 
 $$
 \begin{bmatrix}
@@ -279,6 +281,41 @@ v_y
 \end{bmatrix}
 $$
 
+i.e.,
+
+$$
+\frac{ds}{dt} =
+\begin{bmatrix}
+-\frac{k}{m}v_x\\
+-g - \frac{k}{m}v_y \\
+v_x \\
+v_y
+\end{bmatrix}
+= f(t,s)
+$$
+
+We will thus define our auxiliary function f such as:
+
+$$
+f(t,s) = 
+\begin{bmatrix}
+-\frac{k}{m}v_x\\
+-g - \frac{k}{m}v_y \\
+v_x \\
+v_y
+\end{bmatrix}
+$$
+
+And use it to approximate the values of s using Euler's method:
+
+$$
+\begin{cases}
+s_{n+1} = s_n+  hf(t_n,s_n) \\
+t_{n+1} = t_n + h
+\end{cases}
+$$
+
+It is worth noting that f does not strictly depend on time and could be written as f(s), I decided to stick to the general version for clarity purposes.
 
 The implementation of this model as well as the comparison between Euler's method and the analytical solution can be found in "models/linear_drag.py"
 
