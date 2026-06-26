@@ -194,8 +194,14 @@ These analytical solutions provide a reference against which numerical methods s
 
 ### Euler's method
 
-Euler's method is a numerical technique for solving differential equations and works as follows:   
-Suppose we have a differential equation $$\frac{dy}{dx} = f(x,y)$$ with initial conditions $$(x_0,y_0)$$   
+Euler's method is a numerical technique for solving differential equations of the form:   
+
+$$
+\frac{dy}{dx} = f(x,y)
+$$ 
+
+With initial conditions $$(x_0,y_0)$$   
+It works as follow : 
 given a step size "h", we can compute successive approximations of y with the following formula:  
 
 $$
@@ -232,7 +238,7 @@ x_{n+1} = x_n + h
 \end{cases}
 $$
 
-It is worth noting that y(x) does not have to be a scalar and can indeed be a vector of dimension n, provided that $f : \mathbb{R}^n \to \mathbb{R}^n$. This will prove usefull in the next section 
+It is worth noting that y(x) does not have to be a scalar and can indeed be a vector of dimension n, provided that $f : \mathbb{R}^n \to \mathbb{R}^n$. This will prove useful in the next section 
 
 ### Numerical application
 
@@ -242,12 +248,12 @@ $$
 \begin{cases}
 \frac{dv_x}{dt} = -\frac{k}{m}v_x \\
 \frac{dv_y}{dt} = -g - \frac{k}{m}v_y \\
-\frac{x}{dt} = v_x  \\
-\frac{y}{dt} = v_y 
+\frac{dx}{dt} = v_x  \\
+\frac{dy}{dt} = v_y 
 \end{cases}
 $$
 
-Using Euler's method requires us modeling the state of our system as a state vector:
+Using Euler's method requires modeling the state of our system as a state vector:
 
 $$
 \mathbf{s} =
@@ -259,7 +265,7 @@ y
 \end{bmatrix}
 $$
 
-$\frac{ds}{dt}$ then becomes : 
+$\frac{d\mathbf{s}}{dt}$ then becomes : 
 
 $$
 \begin{bmatrix}
@@ -284,20 +290,20 @@ $$
 i.e.,
 
 $$
-\frac{ds}{dt} =
+\frac{d\mathbf{s}}{dt} =
 \begin{bmatrix}
 -\frac{k}{m}v_x\\
 -g - \frac{k}{m}v_y \\
 v_x \\
 v_y
 \end{bmatrix}
-= f(t,s)
+= f(t,\mathbf{s})
 $$
 
-We will thus define our auxiliary function f such as:
+We therefore define the function f by:
 
 $$
-f(t,s) = 
+f(t,\mathbf{s}) = 
 \begin{bmatrix}
 -\frac{k}{m}v_x\\
 -g - \frac{k}{m}v_y \\
@@ -306,16 +312,16 @@ v_y
 \end{bmatrix}
 $$
 
-And use it to approximate the values of s using Euler's method:
+And use it to approximate the values of \mathbf{s} using Euler's method:
 
 $$
 \begin{cases}
-s_{n+1} = s_n+  hf(t_n,s_n) \\
+\mathbf{s_{n+1}} = \mathbf{s_n} +  hf(t_n,\mathbf{s_n}) \\
 t_{n+1} = t_n + h
 \end{cases}
 $$
 
-It is worth noting that f does not strictly depend on time and could be written as f(s), I decided to stick to the general version for clarity purposes.
+It is worth noting that f does not strictly depend on time and could be written as f(\mathbf{s}), I decided to stick to the general version for clarity purposes, given that Euler's method is presented as such.
 
 The implementation of this model as well as the comparison between Euler's method and the analytical solution can be found in "models/linear_drag.py"
 
@@ -350,7 +356,54 @@ $$
 \end{cases}
 $$ 
 
-These equations form a system of coupled nonlinear, nonhomogeneous ordinary differential equations. Since no simple closed-form solution exists for the general case, Euler's method will be used to obtain a numerical approximation of the trajectory.
+These equations form a system of coupled nonlinear, nonhomogeneous ordinary differential equations. Since no simple closed-form solution exists for the general case, Euler's method will be used to obtain a numerical approximation of the trajectory.    
+
+Since Euler's method has been presented in section two, we will simply model the governing equations using the same state vector as the linear drag model:
+
+$$
+\mathbf{s} =
+\begin{bmatrix}
+v_x \\
+v_y \\
+x \\
+y
+\end{bmatrix}
+$$
+
+i.e.,
+
+$$
+\frac{d\mathbf{s}}{dt} =
+\begin{bmatrix}
+-\frac{k}{m}|v|v_x \\
+-\frac{k}{m}|v|v_y -g  \\
+v_x \\
+v_y
+\end{bmatrix}
+= f(t,\mathbf{s})
+$$
+
+We therefore define the function f by:
+
+$$
+f(t,\mathbf{s}) = 
+\begin{bmatrix}
+-\frac{k}{m}|v|v_x \\
+-\frac{k}{m}|v|v_y -g  \\
+v_x \\
+v_y
+\end{bmatrix}
+$$
+
+And use it to approximate the values of \mathbf{s} using Euler's method:
+
+$$
+\begin{cases}
+\mathbf{s_{n+1}} = \mathbf{s_n} +  hf(t_n,\mathbf{s_n}) \\
+t_{n+1} = t_n + h
+\end{cases}
+$$
+
 
 
 
