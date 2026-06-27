@@ -16,6 +16,7 @@ This project explores mathematical modelling and numerical simulation through th
 - [1. Ideal model (no drag)](#1-ideal-model-no-drag)
 - [2. Linear drag model](#2-linear-drag-model)
 - [3. Quadratic drag model](#3-quadratic-drag-model)
+- [4. Future work](#4-future-work)
 
 ## 1. Ideal model (no drag)
 
@@ -487,15 +488,10 @@ The figure below compares projectile trajectories computed using Euler's method 
 
 We can see that RK4 stays accurate longer, while the error accumulates rather quickly for Euler's method.
 
-## 4. Stochastic Simulations
 
-Having implented the quadratic drah model, we will use the RK4 implentation to introduce uncertainty into the launch conditions. Specifically, this will be done by modeling the launch angle as a normal law:
-
-$$
-\theta \sim \mathcal{N}(\theta _m, \sigma^2)
-$$
-
-
+## 4. Future Work
+- Monte Carlo simulation over uncertain initial conditions (launch angle, velocity, drag coefficient)
+- Possible extensions: wind, Magnus effect, 3D trajectories
 
 
 
