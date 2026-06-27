@@ -1,5 +1,16 @@
 # computational-ballistics
-A simulation of bullet trajectories with increasing levels of accuracy and complexity.
+
+This project explores mathematical modelling and numerical simulation through the study of projectile trajectories, starting from the ideal case with no air resistance and working through progressively more realistic models. Analytical solutions are derived when possible, while numerical approximations are computed using both Euler's method and the fourth order Runge-Kutta (RK4) method.
+
+## Features
+
+- Analytical solution for projectile motion without drag
+- Analytical solution for linear drag
+- Euler method implementation
+- Fourth order Runge-Kutta (RK4) implementation
+- Quadratic drag model
+- Comparison of analytical and numerical solutions
+- Trajectory visualization with Matplotlib
 
 ## Table of Contents
 - [1. Ideal model (no drag)](#1-ideal-model-no-drag)
@@ -201,8 +212,8 @@ $$
 $$ 
 
 With initial conditions $$(x_0,y_0)$$   
-It works as follow : 
-given a step size "h", we can compute successive approximations of y with the following formula:  
+It works as follow :   
+Given a step size _h_ , we can compute successive approximations of y with the following formula:  
 
 $$
 \begin{cases}
@@ -238,7 +249,9 @@ x_{n+1} = x_n + h
 \end{cases}
 $$
 
-It is worth noting that y(x) does not have to be a scalar and can indeed be a vector of dimension n, provided that $f : \mathbb{R}^n \to \mathbb{R}^n$. This will prove useful in the next section 
+The local truncation error is therefore $O(h^2)$ , while the global error accumulated over many steps is O(h).
+
+It is worth noting that y(x) does not have to be a scalar and can indeed be a vector in $\mathbb{R}^n$ , provided that $f : \mathbb{R}^n \to \mathbb{R}^n$. This will prove useful in the next section.
 
 ### Numerical application
 
@@ -399,7 +412,7 @@ v_y
 \end{bmatrix}
 $$
 
-And use it to approximate the values of \mathbf{s} using Euler's method:
+And use it to approximate the values of $\mathbf{s}$ using Euler's method:
 
 $$
 \begin{cases}
@@ -407,6 +420,44 @@ $$
 t_{n+1} = t_n + h
 \end{cases}
 $$
+
+### Fourth order Runge-Kutta (RK4)
+
+The fourth order Runge-Kutta method is another numerical technique for solving differential equations of the same form as Euler's, i.e.,
+
+$$
+\frac{dy}{dx} = f(x,y)
+$$ 
+
+Given the initial conditions $$(x_0,y_0)$$   
+
+It works as follows:   
+
+Given a step size _h_ , we can compute successive approximations of y with the following formula:  
+
+$$
+\begin{cases}
+y_{n+1} = y_n + \frac{h}{6} (k_1 +2k_2 + 2k_3 + k_4) \\
+x_{n+1} = x_n + h
+\end{cases}
+$$
+
+Where:
+
+$$
+\begin{cases}
+k_1 = f(x_n,y_n) \\
+k_2 = f(x_n + \frac{h}{2} ,y_n + \frac{h}{2}k_1 ) \\
+k_3 = f(x_n + \frac{h}{2} ,y_n + \frac{h}{2}k_2 ) \\
+k_4 = f(x_n + h ,y_n + hk_3 )
+\end{cases}
+$$
+
+The RK4 method can be derived by matching the fourth-order Taylor expansion of the exact solution. The coefficients $k_1$ through $k_4$ are chosen to that effect. The derivation being rather lengthy, it is left as an exercise for the reader.
+
+
+
+
 
 
 
