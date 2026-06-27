@@ -60,6 +60,7 @@ def rk4(f,a,b,h,initial):
         t = t + h
     return np.array(times), np.array(points)
 
+# Reserved for future Monte Carlo extension (not yet used)
 # Ploting the Monte Carlo simulation, state vector is [vx, vy, x, y] :
 def monte_carlo_plot(samples,x0,y0):
     plt.grid(True)
