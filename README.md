@@ -21,7 +21,7 @@ This project explores mathematical modelling and numerical simulation through th
 
 ### Analytical solution
 
-The objective of this project being to model the trajectory of a bullet,we first assume an idealized object of mass (m) that is launched from the point $(x_0,y_0)$ with speed v and at angle $\theta$  
+The objective of this project being to model the trajectory of a bullet, we first assume an idealized object of mass (m) that is launched from the point $(x_0,y_0)$ with speed v and at angle $\theta$  
 From Newton's second law, we know that
 
 $$
@@ -223,7 +223,7 @@ y(t) = \frac{m}{k} (v\sin(\theta) + \frac{m}{k}g) (1- e^{-\frac{k}{m}t}) -\frac{
 \end{cases}
 $$
 
-These analytical solutions provide a reference against which numerical methods such as Euler and Runge–Kutta methods can be evaluated. we will have to rely on numerical approximations of the solutions once quadratic drag is introduced, since analytical solutions will no longer be easily obtained.
+These analytical solutions provide a reference against which numerical methods such as Euler and Runge–Kutta methods can be evaluated. We will have to rely on numerical approximations of the solutions once quadratic drag is introduced, since analytical solutions will no longer be easily obtained.
 
 ### Euler's method
 
@@ -234,7 +234,7 @@ $$
 $$ 
 
 With initial conditions $(x_0,y_0)$   
-It works as follow :   
+It works as follows:   
 Given a step size _h_ , we can compute successive approximations of y with the following formula:  
 
 $$
