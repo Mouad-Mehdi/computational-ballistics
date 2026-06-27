@@ -100,7 +100,7 @@ Using these expressions, I wrote code that calculated the trajectory in "Ideal.p
 
 ![Ideal Model](images/ideal_model.png)
 
-The trajectory is a perfect parabola, which is to be expected given the only force excerted on the projectile is gravity.
+The trajectory is a perfect parabola, which is to be expected given the only force exerted on the projectile is gravity.
 
 ## 2. Linear drag Model
 
@@ -233,7 +233,7 @@ $$
 \frac{dy}{dx} = f(x,y)
 $$ 
 
-With initial conditions $$(x_0,y_0)$$   
+With initial conditions $(x_0,y_0)$   
 It works as follow :   
 Given a step size _h_ , we can compute successive approximations of y with the following formula:  
 
@@ -453,7 +453,7 @@ $$
 \frac{dy}{dx} = f(x,y)
 $$ 
 
-Given the initial conditions $$(x_0,y_0)$$   
+Given the initial conditions $(x_0,y_0)$   
 
 It works as follows:   
 
