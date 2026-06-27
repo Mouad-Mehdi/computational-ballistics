@@ -62,8 +62,8 @@ With:
 
 $$
 \begin{cases}
-v_{x0} = vcos(\theta)\\
-v_{y0} = vsin(\theta)
+v_{x0} = v \cos(\theta)  \\
+v_{y0} = v \sin(\theta)
 \end{cases}
 $$
 
@@ -71,15 +71,15 @@ Integrating once more yields the position:
 
 $$
 \begin{cases}
-x =  vcos(\theta)t + x_{0} \\
-y = -\frac{g}{2}t^2 + vsin(\theta)t + y_0
+x =  v\cos(\theta)t + x_{0} \\
+y = -\frac{g}{2}t^2 + v\sin(\theta)t + y_0
 \end{cases}
 $$
 
 Assuming that ground level is at y = 0, we can calculate the flight time by solving the equation y(t) = 0
 
 $$
-0 = -\frac{g}{2}t_{flight}^2 + vsin(\theta)t_{flight} + y_0
+0 = -\frac{g}{2}t_{flight}^2 + v\sin(\theta)t_{flight} + y_0
 $$
 
 Using the quadratic formula:
@@ -100,7 +100,7 @@ Using these expressions, I wrote code that calculated the trajectory in "Ideal.p
 
 ![Ideal Model](images/ideal_model.png)
 
-The trajectory is a perfect parabola, which is to be expected given the only force excerced on the projectile is gravity.
+The trajectory is a perfect parabola, which is to be expected given the only force excerted on the projectile is gravity.
 
 ## 2. Linear drag Model
 
@@ -176,8 +176,8 @@ Using the initial conditions:
 
 $$
 \begin{cases}
-v_{x0} = vcos(\theta) \\
-v_{y0} = vsin(\theta)
+v_{x0} = v\cos(\theta) \\
+v_{y0} = v\sin(\theta)
 \end{cases}
 $$
 
@@ -185,8 +185,8 @@ We can conclude with the two completed velocity equations:
 
 $$
 \begin{cases}
-v_x(t) = vcos(\theta) e^{-\frac{k}{m}t} \\
-v_{y}(t) = (vsin(\theta) + \frac{m}{k}g) e^{-\frac{k}{m}t} -\frac{m}{k}g
+v_x(t) = v\cos(\theta) e^{-\frac{k}{m}t} \\
+v_{y}(t) = (v\sin(\theta) + \frac{m}{k}g) e^{-\frac{k}{m}t} -\frac{m}{k}g
 \end{cases}
 $$
 
@@ -209,8 +209,8 @@ Integrating the velocity equations with respect to time yields the position equa
 
 $$
 \begin{cases}
-x(t) = -\frac{m}{k} vcos(\theta) e^{-\frac{k}{m}t} + C \\
-y(t) = -\frac{m}{k} (vsin(\theta) + \frac{m}{k}g) e^{-\frac{k}{m}t} -\frac{m}{k}gt + C
+x(t) = -\frac{m}{k} v\cos(\theta) e^{-\frac{k}{m}t} + C \\
+y(t) = -\frac{m}{k} (v\sin(\theta) + \frac{m}{k}g) e^{-\frac{k}{m}t} -\frac{m}{k}gt + C
 \end{cases}
 $$
 
@@ -218,8 +218,8 @@ And finally:
 
 $$
 \begin{cases}
-x(t) = \frac{m}{k} vcos(\theta)(1 - e^{-\frac{k}{m}t}) + x_0  \\
-y(t) = \frac{m}{k} (vsin(\theta) + \frac{m}{k}g) (1- e^{-\frac{k}{m}t}) -\frac{m}{k}gt + y_0
+x(t) = \frac{m}{k} v\cos(\theta)(1 - e^{-\frac{k}{m}t}) + x_0  \\
+y(t) = \frac{m}{k} (v\sin(\theta) + \frac{m}{k}g) (1- e^{-\frac{k}{m}t}) -\frac{m}{k}gt + y_0
 \end{cases}
 $$
 
