@@ -19,6 +19,8 @@ This project explores mathematical modelling and numerical simulation through th
 
 ## 1. Ideal model (no drag)
 
+### Analytical solution
+
 The objective of this project being to model the trajectory of a bullet,we first assume an idealized object of mass (m) that is launched from the point $(x_0,y_0)$ with speed v and at angle $\theta$  
 From Newton's second law, we know that
 
@@ -92,8 +94,13 @@ $$
 t_{flight} = \frac{v\sin(\theta) + \sqrt{v^2\sin^2(\theta) + 2gy_0}}{g}
 $$
 
-Using these expressions, I wrote code that calculated the trajectory in "Ideal.py" and represented it in Cartesian coordinates with NumPy.
+Using these expressions, I wrote code that calculated the trajectory in "Ideal.py" and represented it on a graph using NumPy and Matplotlib.
 
+### Results
+
+![Ideal Model](images/ideal_model.png)
+
+The trajectory is a perfect parabola, which is to be expected given the only force excerced on the projectile is gravity.
 
 ## 2. Linear drag Model
 
@@ -174,7 +181,7 @@ v_{y0} = vsin(\theta)
 \end{cases}
 $$
 
-We can conclude with the two completed speed equations: 
+We can conclude with the two completed velocity equations: 
 
 $$
 \begin{cases}
@@ -183,7 +190,22 @@ v_{y}(t) = (vsin(\theta) + \frac{m}{k}g) e^{-\frac{k}{m}t} -\frac{m}{k}g
 \end{cases}
 $$
 
-Integrating with respect to time yields the position equations below: 
+Taking the limit as ${t \to \infty}$ yields us with the terminal velocity:
+
+$$
+\begin{cases}
+\lim_{t \to \infty} v_x(t) = 0 \\
+\lim_{t \to \infty} v_{y}(t) = -\frac{m}{k}g
+\end{cases}
+$$
+
+i.e.,
+
+$$
+v_{max} = \frac{m}{k}g
+$$
+
+Integrating the velocity equations with respect to time yields the position equations below: 
 
 $$
 \begin{cases}
@@ -325,7 +347,7 @@ v_y
 \end{bmatrix}
 $$
 
-And use it to approximate the values of \mathbf{s} using Euler's method:
+And use it to approximate the values of $\mathbf{s}$ using Euler's method:
 
 $$
 \begin{cases}
@@ -339,6 +361,8 @@ It is worth noting that f does not strictly depend on time and could be written 
 ### Results
 
 ![Euler comparison](images/euler_comparison.png)
+
+We can see here that Euler's method is more accurate as the time step approaches 0, with errors starting to appear the longer the simulation is running.
 
 The implementation of this model as well as the comparison between Euler's method and the analytical solution can be found in "models/linear_drag.py"
 
@@ -454,6 +478,14 @@ k_4 = f(x_n + h ,y_n + hk_3 )
 $$
 
 The RK4 method can be derived by matching the fourth-order Taylor expansion of the exact solution. The coefficients $k_1$ through $k_4$ are chosen to that effect. The derivation being rather lengthy, it is left as an exercise for the reader.
+
+### Results
+
+The figure below compares projectile trajectories computed using Euler's method and RK4:
+
+![Euler vs RK4](images/euler_rk4_comp.png)
+
+We can see that RK4 stays accurate longer, while the error accumulates rather quickly for Euler's method.
 
 
 
