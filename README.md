@@ -28,7 +28,7 @@ $$
 \sum \vec{F_{ext}} = m\vec{a}
 $$
 
-Assuming that the only force exerted on the projectile is its weight , we can derive that   
+Assuming that the only force exerted on the projectile is its weight, we can derive that   
 
 $$
 \sum \vec{F_{ext}} = \vec{P} = m\vec{a}
@@ -271,7 +271,7 @@ x_{n+1} = x_n + h
 \end{cases}
 $$
 
-The local truncation error is therefore $O(h^2)$ , while the global error accumulated over many steps is O(h).
+The local truncation error is therefore $O(h^2)$, while the global error accumulated over many steps is O(h).
 
 It is worth noting that y(x) does not have to be a scalar and can indeed be a vector in $\mathbb{R}^n$ , provided that $f : \mathbb{R}^n \to \mathbb{R}^n$. This will prove useful in the next section.
 
