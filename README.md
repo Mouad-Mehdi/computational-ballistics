@@ -321,7 +321,11 @@ t_{n+1} = t_n + h
 \end{cases}
 $$
 
-It is worth noting that f does not strictly depend on time and could be written as f(\mathbf{s}), I decided to stick to the general version for clarity purposes, given that Euler's method is presented as such.
+It is worth noting that f does not strictly depend on time and could be written as $f(\mathbf{s})$, I decided to stick to the general version for clarity purposes, given that Euler's method is presented as such.
+
+### Results
+
+![Euler comparison](images/euler_comparison.png)
 
 The implementation of this model as well as the comparison between Euler's method and the analytical solution can be found in "models/linear_drag.py"
 
