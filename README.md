@@ -487,6 +487,13 @@ The figure below compares projectile trajectories computed using Euler's method 
 
 We can see that RK4 stays accurate longer, while the error accumulates rather quickly for Euler's method.
 
+## 4. Stochastic Simulations
+
+Having implented the quadratic drah model, we will use the RK4 implentation to introduce uncertainty into the launch conditions. Specifically, this will be done by modeling the launch angle as a normal law:
+
+$$
+\theta \sim \mathcal{N}(\theta _m, \sigma^2)
+$$
 
 
 
